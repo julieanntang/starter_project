@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavBar from "./components/NavBar";
+import { Container } from "semantic-ui-react";
+import { Route, Switch } from "react-router";
+import { routes } from "./components/routes";
 
 function App() {
+  const renderRoutes = () => {
+    return routes.map((route) => (
+      <Route exact path={route.pathname} component={route.component} />
+    ));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavBar />
+      <Container>
+        <Switch>
+          {renderRoutes()}
+          <Route component={() => <p>react router 404 path not found</p>} />
+        </Switch>
+      </Container>
+    </>
   );
 }
 
